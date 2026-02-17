@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     public void GoToMenu()
     {
         m_score = 0;
-        CardManager.Instance.DestroyCards();
+        CardManager.Instance.ReturnCards();
     }
 
 

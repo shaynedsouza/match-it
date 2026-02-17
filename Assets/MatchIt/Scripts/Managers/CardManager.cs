@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    public Card CardPrefab;
     public Transform CardContainer;
     public CardDescription CardDescriptionScriptableObject;
     public float ComparisionDelay = 0.5f;
@@ -49,12 +48,16 @@ public class CardManager : MonoBehaviour
             //Select a random card
             int randomIndex = Random.Range(0, cards.Count);
 
-            //Instantiate and set up the card
-            Card newCard = Instantiate(CardPrefab, CardContainer);
+            //Get a card from the object pool and initialise it
+            Card newCard = ObjectPool.Instance.GetCard();
+            newCard.transform.SetParent(CardContainer);
+            newCard.transform.localScale = Vector3.one;
             newCard.GetComponent<Card>().InitialiseCard(cards[randomIndex].CardID, cards[randomIndex].CardImage);
 
-            //Instantiate the second card of the pair
-            newCard = Instantiate(CardPrefab, CardContainer);
+            //Get a second card from the object pool and initialise it
+            newCard = ObjectPool.Instance.GetCard();
+            newCard.transform.SetParent(CardContainer);
+            newCard.transform.localScale = Vector3.one;
             newCard.GetComponent<Card>().InitialiseCard(cards[randomIndex].CardID, cards[randomIndex].CardImage);
 
 
@@ -76,13 +79,16 @@ public class CardManager : MonoBehaviour
 
 
     /// <summary>
-    /// Destroys all the cards in the CardContainer
+    /// Returns all the cards in the CardContainer to the object pool
     /// </summary>
-    public void DestroyCards()
+    public void ReturnCards()
     {
-        foreach (Transform child in CardContainer)
-            Destroy(child.gameObject);
-
+        Debug.Log("Returning cards to pool, CardContainer count" + CardContainer.childCount);
+        for (int i = CardContainer.childCount - 1; i >= 0; i--)
+        {
+            Transform child = CardContainer.GetChild(i);
+            ObjectPool.Instance.ReturnCard(child.GetComponent<Card>());
+        }
     }
 
 
