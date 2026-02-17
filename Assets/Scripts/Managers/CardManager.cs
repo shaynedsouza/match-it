@@ -134,8 +134,14 @@ public class CardManager : MonoBehaviour
                 bonusMultiplierCount++;
                 m_score += 10 * bonusMultiplierCount;
                 CanvasManager.Instance.SetRoundScore(m_score);
-                CanvasManager.Instance.ShowBonusMultiplier(bonusMultiplierCount);
 
+
+                //Show the multiplier if the player has more than 1 combo
+                if (bonusMultiplierCount > 1)
+                    CanvasManager.Instance.ShowBonusMultiplier(bonusMultiplierCount);
+
+
+                //Check if any pairs are left, if not finish the game
                 if (m_numberOfPairsLeft <= 0)
                     GameManager.Instance.FinishedGame(m_score);
 
