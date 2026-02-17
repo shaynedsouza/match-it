@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public void FinishedGame(int score)
     {
         m_score += score;
+        AudioManager.Instance.PlaySFX("win", 0.5f);
         PlayerPrefs.SetInt(m_scoreString, m_score);
         CanvasManager.Instance.ShowResultPanel(true, m_score);
         // CardManager.Instance.DestroyCards();

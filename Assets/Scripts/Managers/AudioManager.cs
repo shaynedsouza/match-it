@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void PlaySFX(string name)
+    public void PlaySFX(string name, float delay = 0f)
     {
         AudioClip clip = null;
         var maxVolume = 1f;
@@ -49,13 +49,33 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        StartCoroutine(DoWIthDelay(() =>
+                {
 
-        AudioSourceSFX.clip = clip;
-        AudioSourceSFX.volume = maxVolume;
-        // AudioSourceSFX.Play();
-        AudioSourceSFX.PlayOneShot(clip, maxVolume);
+                    AudioSourceSFX.clip = clip;
+                    AudioSourceSFX.volume = maxVolume;
+                    // AudioSourceSFX.Play();
+                    AudioSourceSFX.PlayOneShot(clip, maxVolume);
+
+                }, delay));
+
     }
 
+
+
+
+
+    /// <summary>
+    /// Do some action with delay
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="delay"></param>
+    /// <returns></returns>
+    private IEnumerator DoWIthDelay(Action action, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        action?.Invoke();
+    }
 
 }
 
@@ -67,6 +87,7 @@ public class AudioClips
     public float MaxVolume;
     public AudioClip AudioClip;
 }
+
 
 
 
