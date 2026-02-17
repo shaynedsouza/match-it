@@ -16,6 +16,7 @@ public class Card : MonoBehaviour
 
     /// <summary>
     /// Setting up the card with the correct ID and image. This will be called from the CardManager when we spawn the cards
+    /// We have to reveal the card at the start
     /// </summary>
     /// <param name="cardID"></param>
     /// <param name="cardImage"></param>
@@ -23,6 +24,10 @@ public class Card : MonoBehaviour
     {
         CardID = cardID;
         m_frontImage.GetComponent<Image>().sprite = cardImage;
+        m_frontImage.SetActive(true);
+        m_backImage.SetActive(false);
+        m_isRevealed = true;
+
     }
 
 

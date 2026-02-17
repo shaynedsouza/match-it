@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,6 @@ public class GameManager : MonoBehaviour
     {
         m_score = PlayerPrefs.GetInt(m_scoreString, 0);
         CanvasManager.Instance.SetTotalScore(m_score);
-        // CardManager.Instance.SpawnCards(NumberOfPairs);
     }
 
     public void FinishedGame(int score)
@@ -35,11 +35,13 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("win", 0.5f);
         PlayerPrefs.SetInt(m_scoreString, m_score);
         CanvasManager.Instance.ShowResultPanel(true, m_score);
-        // CardManager.Instance.DestroyCards();
 
     }
 
-
+    /// <summary>
+    /// The difficulty is set by the user in the menu, and it determines how many pairs of cards will be spawned in the game.
+    /// </summary>
+    /// <param name="difficulty"></param>
     public void StartGame(int difficulty)
     {
         switch (difficulty)
@@ -56,11 +58,35 @@ public class GameManager : MonoBehaviour
         }
         CardManager.Instance.SpawnCards(NumberOfPairs);
         CanvasManager.Instance.StartGame();
+        AudioManager.Instance.PlaySFX("countdown");
+        StartCoroutine(DoWithDelay(() =>
+        {
+            CardManager.Instance.HideAllCards();
+        }, 3f));
     }
+
+
+
 
     public void GoToMenu()
     {
         m_score = 0;
         CardManager.Instance.DestroyCards();
+    }
+
+
+
+
+
+    /// <summary>
+    /// Do some action with delay
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="delay"></param>
+    /// <returns></returns>
+    private IEnumerator DoWithDelay(Action action, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        action?.Invoke();
     }
 }

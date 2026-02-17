@@ -68,7 +68,16 @@ public class CardManager : MonoBehaviour
     }
 
 
-    //Destroy all the cards
+    public void HideAllCards()
+    {
+        foreach (Transform child in CardContainer)
+            child.GetComponent<Card>().Hide();
+    }
+
+
+    /// <summary>
+    /// Destroys all the cards in the CardContainer
+    /// </summary>
     public void DestroyCards()
     {
         foreach (Transform child in CardContainer)
@@ -85,27 +94,15 @@ public class CardManager : MonoBehaviour
     {
         int childCount = CardContainer.childCount;
 
-        // Copy children to array
-        Transform[] children = new Transform[childCount];
-        for (int i = 0; i < childCount; i++)
+        for (int i = childCount - 1; i > 0; i--)
         {
-            children[i] = CardContainer.GetChild(i);
-        }
+            int randomIndex = Random.Range(0, i + 1);
 
-        // Shuffle
-        for (int i = 0; i < childCount; i++)
-        {
-            int randomIndex = Random.Range(i, childCount);
+            Transform childA = CardContainer.GetChild(i);
+            Transform childB = CardContainer.GetChild(randomIndex);
 
-            Transform temp = children[i];
-            children[i] = children[randomIndex];
-            children[randomIndex] = temp;
-        }
-
-        // Apply new sibling order
-        for (int i = 0; i < childCount; i++)
-        {
-            children[i].SetSiblingIndex(i);
+            childA.SetSiblingIndex(randomIndex);
+            childB.SetSiblingIndex(i);
         }
     }
 

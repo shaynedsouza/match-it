@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(DoWIthDelay(() =>
+        StartCoroutine(DoWithDelay(() =>
                 {
 
                     AudioSourceSFX.clip = clip;
@@ -71,7 +71,7 @@ public class AudioManager : MonoBehaviour
     /// <param name="action"></param>
     /// <param name="delay"></param>
     /// <returns></returns>
-    private IEnumerator DoWIthDelay(Action action, float delay)
+    private IEnumerator DoWithDelay(Action action, float delay)
     {
         yield return new WaitForSeconds(delay);
         action?.Invoke();
