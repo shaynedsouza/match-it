@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private string m_scoreString = "SCORE";
+    private int m_score = 0;
+
+    public static GameManager Instance;
+    public int NumberOfPairs = 8;
+
+
+    private void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    void Start()
     {
-        
+        m_score = PlayerPrefs.GetInt("score", 0);
+        CardManager.Instance.SpawnCards(NumberOfPairs);
     }
+
+
 }

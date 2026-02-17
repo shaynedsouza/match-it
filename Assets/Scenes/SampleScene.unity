@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f3f60f698b2224a83cb2ac91d88175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberOfPairs: 15
 --- !u!4 &278005783
 Transform:
   m_ObjectHideFlags: 0
@@ -564,12 +565,12 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 300
+    m_Top: 150
     m_Bottom: 0
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 230, y: 306}
+  m_CellSize: {x: 115, y: 153}
   m_Spacing: {x: 100, y: 100}
   m_Constraint: 0
   m_ConstraintCount: 25
@@ -586,6 +587,7 @@ GameObject:
   - component: {fileID: 1459814793}
   - component: {fileID: 1459814792}
   - component: {fileID: 1459814796}
+  - component: {fileID: 1459814797}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -692,6 +694,19 @@ MonoBehaviour:
   CardContainer: {fileID: 1420998050}
   CardDescriptionScriptableObject: {fileID: 11400000, guid: 82d36a295b489244381a1f54894e9076, type: 2}
   ComparisionDelay: 0.5
+--- !u!114 &1459814797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459814791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6248a84a165b4047ae264b493d303b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreField: {fileID: 0}
 --- !u!1 &1525644806
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,8 +742,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 494.483, y: 286.36096}
+  m_AnchoredPosition: {x: 0, y: -80.75}
+  m_SizeDelta: {x: 238.275, y: 137.988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525644808
 MonoBehaviour:
