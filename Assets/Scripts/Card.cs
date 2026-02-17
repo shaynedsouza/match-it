@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Card : MonoBehaviour
 {
@@ -30,7 +31,8 @@ public class Card : MonoBehaviour
     {
         if (m_isRevealed) return;
 
-        // Add your on-enter logic here
+        DOTween.Kill(m_backImage.transform);
+        m_backImage.transform.DOScale(new Vector3(1.1f, 1.1f, 0), 0.2f).SetEase(Ease.InSine);
         Debug.Log("Pointer entered card: " + gameObject.name);
     }
 
@@ -39,7 +41,8 @@ public class Card : MonoBehaviour
     {
         if (m_isRevealed) return;
 
-        // Add your on-enter logic here
+        DOTween.Kill(m_backImage.transform);
+        m_backImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InSine);
         Debug.Log("Pointer exited card: " + gameObject.name);
     }
 
@@ -60,8 +63,14 @@ public class Card : MonoBehaviour
     public void Reveal()
     {
         m_isRevealed = true;
-        m_frontImage.SetActive(true);
-        m_backImage.SetActive(false);
+        m_frontImage.transform.DOLocalRotate(new Vector3(0, 90, 0), 0f);
+        m_backImage.transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).OnComplete(() =>
+        {
+            m_frontImage.SetActive(true);
+            m_backImage.SetActive(false);
+            m_frontImage.transform.DOLocalRotate(Vector3.zero, 0.3f);
+        });
+
     }
 
     // public void Hide()

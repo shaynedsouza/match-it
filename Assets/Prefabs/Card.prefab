@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 230, y: 306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7242773483112259676
 CanvasRenderer:
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.2431302, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0663ef9170bb6941950f96e5fbc9df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardID: 0
   m_frontImage: {fileID: 2413187448469060787}
   m_backImage: {fileID: 7807659928083350847}
 --- !u!114 &3924816008957463396
