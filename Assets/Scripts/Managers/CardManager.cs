@@ -7,12 +7,36 @@ public class CardManager : MonoBehaviour
     public Card CardPrefab;
     public Transform CardContainer;
     public CardDescription CardDescriptionScriptableObject;
+    public float ComparisionDelay = 0.5f;
+    public static CardManager Instance;
+
+
+    private bool m_isFirstCardFlipped = false;
+    private Card m_cachedCard;
+
+
+
+
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
+    }
+
+
+
+
 
     private void Start()
     {
-
         SpawnCards(16);
     }
+
+
+
 
     public void SpawnCards(int numberOfCards)
     {
@@ -51,6 +75,11 @@ public class CardManager : MonoBehaviour
 
 
     }
+
+
+
+
+
     /// <summary>
     /// Shuffles the children of the CardContainer so that the pairs are not next to each other
     /// </summary>
@@ -79,6 +108,45 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < childCount; i++)
         {
             children[i].SetSiblingIndex(i);
+        }
+    }
+
+
+
+
+    /// <summary>
+    /// Logic to handle card comparison and matching. This will be called from the Card script when a card is clicked
+    /// </summary>
+    /// <param name="card"></param>
+    // public void OnCardClicked(Card card)
+    public IEnumerator OnCardClicked(Card card)
+    {
+        yield return new WaitForSeconds(ComparisionDelay);
+
+        Debug.Log("Card clicked: " + card.CardID);
+        if (m_isFirstCardFlipped)
+        {
+            if (m_cachedCard.CardID == card.CardID)
+            {
+                Debug.Log("Match!");
+                AudioManager.Instance.PlaySFX("correct");
+                m_isFirstCardFlipped = false;
+                m_cachedCard = null;
+            }
+            else
+            {
+                Debug.Log("No match!");
+                AudioManager.Instance.PlaySFX("wrong");
+                m_isFirstCardFlipped = false;
+                m_cachedCard.Hide();
+                card.Hide();
+                m_cachedCard = null;
+            }
+        }
+        else
+        {
+            m_isFirstCardFlipped = true;
+            m_cachedCard = card;
         }
     }
 }

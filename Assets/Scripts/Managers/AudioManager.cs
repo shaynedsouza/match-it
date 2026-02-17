@@ -52,7 +52,8 @@ public class AudioManager : MonoBehaviour
 
         AudioSourceSFX.clip = clip;
         AudioSourceSFX.volume = maxVolume;
-        AudioSourceSFX.Play();
+        // AudioSourceSFX.Play();
+        AudioSourceSFX.PlayOneShot(clip, maxVolume);
     }
 
 

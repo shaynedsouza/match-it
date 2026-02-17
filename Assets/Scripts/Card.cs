@@ -27,43 +27,18 @@ public class Card : MonoBehaviour
 
 
 
-    public void OnPointerEnter()
-    {
-        if (m_isRevealed) return;
-
-        DOTween.Kill(m_backImage.transform);
-        m_backImage.transform.DOScale(new Vector3(1.1f, 1.1f, 0), 0.2f).SetEase(Ease.InSine);
-        Debug.Log("Pointer entered card: " + gameObject.name);
-    }
-
-
-    public void OnPointerExit()
-    {
-        if (m_isRevealed) return;
-
-        DOTween.Kill(m_backImage.transform);
-        m_backImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InSine);
-        Debug.Log("Pointer exited card: " + gameObject.name);
-    }
-
-
-
-
-
-
-    public void OnCardClicked()
-    {
-        if (m_isRevealed) return;
-
-        Reveal();
-    }
 
     public void Reveal()
     {
         m_isRevealed = true;
+
+        DOTween.Kill(m_backImage.transform);
+        DOTween.Kill(m_frontImage.transform);
+
         AudioManager.Instance.PlaySFX("card_turn");
-        m_frontImage.transform.DOLocalRotate(new Vector3(0, 90, 0), 0f);
-        m_backImage.transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).OnComplete(() =>
+
+        m_frontImage.transform.DOLocalRotate(new Vector3(0f, 90f, 0f), 0f);
+        m_backImage.transform.DOLocalRotate(new Vector3(0f, 90f, 0f), 0.3f).OnComplete(() =>
         {
             m_frontImage.SetActive(true);
             m_backImage.SetActive(false);
@@ -72,13 +47,55 @@ public class Card : MonoBehaviour
 
     }
 
-    // public void Hide()
-    // {
-    //     isRevealed = false;
-    //     front.SetActive(false);
-    //     back.SetActive(true);
-    // }
+    public void Hide()
+    {
+        m_isRevealed = false;
+
+        DOTween.Kill(m_backImage.transform);
+        DOTween.Kill(m_frontImage.transform);
+
+        // AudioManager.Instance.PlaySFX("card_turn");
+
+        m_backImage.transform.DOLocalRotate(new Vector3(0f, 90f, 0f), 0f);
+        m_frontImage.transform.DOLocalRotate(new Vector3(0f, 90f, 0f), 0.3f).OnComplete(() =>
+        {
+            m_backImage.SetActive(true);
+            m_frontImage.SetActive(false);
+            m_backImage.transform.DOLocalRotate(Vector3.zero, 0.3f);
+        });
+
+    }
 
 
+    #region Callbacks
+    public void OnPointerEnter()
+    {
+        if (m_isRevealed) return;
+
+        DOTween.Kill(m_backImage.transform);
+        m_backImage.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0.3f);
+        m_backImage.transform.DOScale(new Vector3(1.1f, 1.1f, 0f), 0.2f).SetEase(Ease.InSine);
+        Debug.Log("Pointer entered card: " + gameObject.name);
+    }
+
+    public void OnPointerExit()
+    {
+        if (m_isRevealed) return;
+
+        DOTween.Kill(m_backImage.transform);
+        m_backImage.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0.3f);
+        m_backImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InSine);
+        Debug.Log("Pointer exited card: " + gameObject.name);
+    }
+
+    public void OnCardClicked()
+    {
+        if (m_isRevealed) return;
+
+        Reveal();
+        StartCoroutine(CardManager.Instance.OnCardClicked(this));
+    }
+
+    #endregion
 
 }

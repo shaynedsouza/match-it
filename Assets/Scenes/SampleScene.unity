@@ -691,6 +691,7 @@ MonoBehaviour:
   CardPrefab: {fileID: 8500325505997778127, guid: ffb51ba405a91fe43b1d47a063645e11, type: 3}
   CardContainer: {fileID: 1420998050}
   CardDescriptionScriptableObject: {fileID: 11400000, guid: 82d36a295b489244381a1f54894e9076, type: 2}
+  ComparisionDelay: 0.5
 --- !u!1 &1525644806
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +822,22 @@ PrefabInstance:
     - target: {fileID: 8299919369636651525, guid: 3124d95f6e2aa8d49920ad415e20ca94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299919369636651526, guid: 3124d95f6e2aa8d49920ad415e20ca94, type: 3}
+      propertyPath: AudioClipsList.Array.data[0].Name
+      value: card_shuffle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299919369636651526, guid: 3124d95f6e2aa8d49920ad415e20ca94, type: 3}
+      propertyPath: AudioClipsList.Array.data[1].MaxVolume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299919369636651526, guid: 3124d95f6e2aa8d49920ad415e20ca94, type: 3}
+      propertyPath: AudioClipsList.Array.data[2].MaxVolume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299919369636651526, guid: 3124d95f6e2aa8d49920ad415e20ca94, type: 3}
+      propertyPath: AudioClipsList.Array.data[3].MaxVolume
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3124d95f6e2aa8d49920ad415e20ca94, type: 3}
