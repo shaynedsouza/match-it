@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CardAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 3cd6bbae25ae6e0469d5635d62e58ac6, type: 3}
+    - {fileID: 2800000, guid: 4fba7c27bcf9365409e5969800b5f8ee, type: 3}
+    - {fileID: 2800000, guid: a84ab2fb6afe153429a2947227f548a4, type: 3}
+    - {fileID: 2800000, guid: 820ca91799aea9e40a012157b74f68a7, type: 3}
+    - {fileID: 2800000, guid: 6a011eeafe0fdc845bcd73fd9d5fd164, type: 3}
+    - {fileID: 2800000, guid: e441c673e8cdebf469babf00e21464df, type: 3}
+    - {fileID: 2800000, guid: bc6f096381063364a891e2fc8eb7e516, type: 3}
+    - {fileID: 2800000, guid: 872034e5244576b4780fb8a8503d0d1b, type: 3}
+    - {fileID: 2800000, guid: cb26c0f0e23e1cb47ac007f3bf8a63f9, type: 3}
+    - {fileID: 2800000, guid: d5a6217a45d32a741ae63ed415395912, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: cb26c0f0e23e1cb47ac007f3bf8a63f9, type: 3}
+  - {fileID: 21300000, guid: bc6f096381063364a891e2fc8eb7e516, type: 3}
+  - {fileID: 21300000, guid: e441c673e8cdebf469babf00e21464df, type: 3}
+  - {fileID: 21300000, guid: 872034e5244576b4780fb8a8503d0d1b, type: 3}
+  - {fileID: 21300000, guid: 820ca91799aea9e40a012157b74f68a7, type: 3}
+  - {fileID: 21300000, guid: 4fba7c27bcf9365409e5969800b5f8ee, type: 3}
+  - {fileID: 21300000, guid: d5a6217a45d32a741ae63ed415395912, type: 3}
+  - {fileID: 21300000, guid: 6a011eeafe0fdc845bcd73fd9d5fd164, type: 3}
+  - {fileID: 21300000, guid: a84ab2fb6afe153429a2947227f548a4, type: 3}
+  - {fileID: 21300000, guid: 3cd6bbae25ae6e0469d5635d62e58ac6, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - cat
+  - dog
+  - frog
+  - chick
+  - penguin
+  - rabbit
+  - card_back
+  - mouse
+  - tortoise
+  - porcupine
+  m_RenderDataMap: {}
+  m_Tag: CardAtlas
+  m_IsVariant: 0

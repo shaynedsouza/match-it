@@ -16,7 +16,7 @@ public class CardManager : MonoBehaviour
 
     private int m_numberOfPairsLeft;
     private int m_score = 0;
-    private int chainCount = 0;
+    private int bonusMultiplierCount = 0;
 
 
     private void Awake()
@@ -36,7 +36,8 @@ public class CardManager : MonoBehaviour
         List<Cards> cards = new List<Cards>(CardDescriptionScriptableObject.cards);
         m_numberOfPairsLeft = numberOfPairs;
         m_score = 0;
-        chainCount = 0;
+        bonusMultiplierCount = 0;
+
         for (int i = 0; i < numberOfPairs; i++)
         {
             //Reset our list of cards if we have used all the cards in the scriptable object
@@ -130,9 +131,10 @@ public class CardManager : MonoBehaviour
                 m_numberOfPairsLeft--;
 
                 //Combos system that rewards player if they get multiple right clicks in a row
-                chainCount++;
-                m_score += 10 * chainCount;
+                bonusMultiplierCount++;
+                m_score += 10 * bonusMultiplierCount;
                 CanvasManager.Instance.SetRoundScore(m_score);
+                CanvasManager.Instance.ShowBonusMultiplier(bonusMultiplierCount);
 
                 if (m_numberOfPairsLeft <= 0)
                     GameManager.Instance.FinishedGame(m_score);
@@ -145,8 +147,9 @@ public class CardManager : MonoBehaviour
                 m_cachedCard.Hide();
                 card.Hide();
                 m_cachedCard = null;
-                chainCount = 0;
+                bonusMultiplierCount = 0;
             }
+
         }
         else
         {

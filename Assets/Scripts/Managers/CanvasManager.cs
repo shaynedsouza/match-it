@@ -10,6 +10,7 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager Instance;
     public TextMeshProUGUI TotalScoreField;
     public TextMeshProUGUI RoundScoreField;
+    public TextMeshProUGUI BonusMultiplierField;
     public GameObject MenuPanel;
     public GameObject ResultPanel;
 
@@ -38,7 +39,13 @@ public class CanvasManager : MonoBehaviour
         RoundScoreField.gameObject.SetActive(true);
     }
 
-
+    public void ShowBonusMultiplier(int multiplier)
+    {
+        BonusMultiplierField.text = "X" + multiplier.ToString();
+        BonusMultiplierField.transform.localScale = Vector3.zero;
+        BonusMultiplierField.gameObject.SetActive(true);
+        BonusMultiplierField.transform.DOPunchScale(Vector3.one, 1f, 1, 0.5f);
+    }
 
     public void ShowResultPanel(bool value, int score = 0)
     {
