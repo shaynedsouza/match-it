@@ -55,14 +55,13 @@ public class Card : MonoBehaviour
     {
         if (m_isRevealed) return;
 
-        Debug.Log("Card revealed: " + gameObject.name);
         Reveal();
-        // gameManager.CardRevealed(this);
     }
 
     public void Reveal()
     {
         m_isRevealed = true;
+        AudioManager.Instance.PlaySFX("card_turn");
         m_frontImage.transform.DOLocalRotate(new Vector3(0, 90, 0), 0f);
         m_backImage.transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).OnComplete(() =>
         {
