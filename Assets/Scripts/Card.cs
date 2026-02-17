@@ -75,7 +75,6 @@ public class Card : MonoBehaviour
         DOTween.Kill(m_backImage.transform);
         m_backImage.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0.3f);
         m_backImage.transform.DOScale(new Vector3(1.1f, 1.1f, 0f), 0.2f).SetEase(Ease.InSine);
-        Debug.Log("Pointer entered card: " + gameObject.name);
     }
 
     public void OnPointerExit()
@@ -85,7 +84,6 @@ public class Card : MonoBehaviour
         DOTween.Kill(m_backImage.transform);
         m_backImage.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0.3f);
         m_backImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InSine);
-        Debug.Log("Pointer exited card: " + gameObject.name);
     }
 
     public void OnCardClicked()

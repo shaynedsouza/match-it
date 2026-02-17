@@ -14,8 +14,9 @@ public class CardManager : MonoBehaviour
     private bool m_isFirstCardFlipped = false;
     private Card m_cachedCard;
 
-
-
+    private int m_numberOfPairsLeft;
+    private int m_score = 0;
+    private int chainCount = 0;
 
 
     private void Awake()
@@ -29,25 +30,14 @@ public class CardManager : MonoBehaviour
 
 
 
-
-    private void Start()
-    {
-        SpawnCards(16);
-    }
-
-
-
-
-    public void SpawnCards(int numberOfCards)
+    public void SpawnCards(int numberOfPairs)
     {
         //We have to mark the cards that have been used to avoid duplicates
         List<Cards> cards = new List<Cards>(CardDescriptionScriptableObject.cards);
-
-
-
-
-        //Dividing by 2 since we want pairs of cards
-        for (int i = 0; i < numberOfCards / 2; i++)
+        m_numberOfPairsLeft = numberOfPairs;
+        m_score = 0;
+        chainCount = 0;
+        for (int i = 0; i < numberOfPairs; i++)
         {
             //Reset our list of cards if we have used all the cards in the scriptable object
             if (cards.Count == 0)
@@ -77,6 +67,13 @@ public class CardManager : MonoBehaviour
     }
 
 
+    //Destroy all the cards
+    public void DestroyCards()
+    {
+        foreach (Transform child in CardContainer)
+            Destroy(child.gameObject);
+
+    }
 
 
 
@@ -123,24 +120,32 @@ public class CardManager : MonoBehaviour
     {
         yield return new WaitForSeconds(ComparisionDelay);
 
-        Debug.Log("Card clicked: " + card.CardID);
         if (m_isFirstCardFlipped)
         {
             if (m_cachedCard.CardID == card.CardID)
             {
-                Debug.Log("Match!");
                 AudioManager.Instance.PlaySFX("correct");
                 m_isFirstCardFlipped = false;
                 m_cachedCard = null;
+                m_numberOfPairsLeft--;
+
+                //Combos system that rewards player if they get multiple right clicks in a row
+                chainCount++;
+                m_score += 10 * chainCount;
+                CanvasManager.Instance.SetRoundScore(m_score);
+
+                if (m_numberOfPairsLeft <= 0)
+                    GameManager.Instance.FinishedGame(m_score);
+
             }
             else
             {
-                Debug.Log("No match!");
                 AudioManager.Instance.PlaySFX("wrong");
                 m_isFirstCardFlipped = false;
                 m_cachedCard.Hide();
                 card.Hide();
                 m_cachedCard = null;
+                chainCount = 0;
             }
         }
         else
